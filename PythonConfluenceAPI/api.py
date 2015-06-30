@@ -100,7 +100,7 @@ class ConfluenceAPI(object):
     def get_content_history_by_id(self, content_id, expand=None, callback=None):
         params = {}
         if expand:
-            params["expand"] =expand
+            params["expand"] = expand
         return self._service_get_request("rest/api/content/{id}/history".format(id=content_id), params=params,
                                          callback=callback)
 
