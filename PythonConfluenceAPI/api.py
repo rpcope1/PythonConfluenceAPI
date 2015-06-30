@@ -17,6 +17,9 @@ api_logger.addHandler(nh)
 class ConfluenceAPI(object):
     DEFAULT_USER_AGENT = "PythonConfluenceAPI"
 
+    NEW_CONTENT_REQUIRED_KEYS = {'type', 'title', 'space', 'body'}
+    UPDATE_CONTENT_REQUIRED_KEYS = {'id', 'version'}
+
     def __init__(self, username, password, uri_base, user_agent=DEFAULT_USER_AGENT):
         self.username = username
         self.password = password
@@ -63,7 +66,7 @@ class ConfluenceAPI(object):
         return self._service_request("PUT", *args, **kwargs)
 
     def get_content(self, content_type=None, space_key=None, title=None, status=None, posting_day=None,
-                    expand=None, start=None, limit=25, callback=None):
+                    expand=None, start=None, limit=None, callback=None):
         params = {}
         if content_type:
             params["type"] = content_type
@@ -77,26 +80,109 @@ class ConfluenceAPI(object):
             params["postingDay"] = posting_day
         if expand:
             params["expand"] = expand
-        if start:
-            params["start"] = start
-        if limit:
-            params["limit"] = limit
+        if start is not None:
+            params["start"] = int(start)
+        if limit is not None:
+            params["limit"] = int(limit)
         return self._service_get_request("rest/api/content", params=params, callback=callback)
 
     def get_content_by_id(self, content_id, status=None, version=None, expand=None, callback=None):
         params = {}
         if status:
-            params["status"] = str(status)
-        if version:
+            params["status"] = status
+        if version is not None:
             params["version"] = int(version)
         if expand:
-            params["expand"] = str(expand)
+            params["expand"] = expand
         return self._service_get_request("rest/api/content/{id}".format(id=content_id), params=params,
                                          callback=callback)
 
     def get_content_history_by_id(self, content_id, expand=None, callback=None):
         params = {}
         if expand:
-            params["expand"] = str(expand)
+            params["expand"] =expand
         return self._service_get_request("rest/api/content/{id}/history".format(id=content_id), params=params,
                                          callback=callback)
+
+    def search_content(self, cql_str=None, cql_context=None, expand=None, start=0, limit=None, callback=None):
+        params = {}
+        if cql_str:
+            params["cql"] = cql_str
+        if cql_context:
+            params["cqlcontext"] = cql_context
+        if expand:
+            params["expand"] = expand
+        if start is not None:
+            params["start"] = int(start)
+        if limit is not None:
+            params["limit"] = int(limit)
+        return self._service_get_request("rest/api/content/search", params=params, callback=callback)
+
+    def get_content_children(self, content_id, expand=None, parent_version=None, callback=None):
+        params = {}
+        if expand:
+            params["expand"] = expand
+        if parent_version:
+            params["parentVersion"] = parent_version
+        return self._service_get_request("rest/api/content/{id}/child".format(id=content_id), params=params,
+                                         callback=callback)
+
+    def get_content_children_by_type(self, content_id, child_type, expand=None, parent_version=None, callback=None):
+        params = {}
+        if expand:
+            params["expand"] = expand
+        if parent_version:
+            params["parentVersion"] = parent_version
+        return self._service_get_request("rest/api/content/{id}/child/{type}".format(id=content_id, type=child_type),
+                                         params=params, callback=callback)
+
+    def get_content_comments(self, content_id, child_type, expand=None, parent_version=None, start=None, limit=None,
+                             location=None, depth=None, callback=None):
+        params = {}
+        if expand:
+            params["expand"] = expand
+        if parent_version:
+            params["parentVersion"] = parent_version
+        if start is not None:
+            params["start"] = int(start)
+        if limit is not None:
+            params["limit"] = int(limit)
+        if location:
+            params["location"] = location
+        if depth:
+            params["depth"] = depth
+        return self._service_get_request("rest/api/content/{id}/child/{type}".format(id=content_id, type=child_type),
+                                         params=params, callback=callback)
+
+    def get_content_attachments(self, content_id, expand=None, start=None, limit=None, filename=None, media_type=None,
+                                callback=None):
+        params = {}
+        if expand:
+            params["expand"] = expand
+        if start is not None:
+            params["start"] = int(start)
+        if limit is not None:
+            params["limit"] = int(limit)
+        if filename is not None:
+            params["filename"] = filename
+        if media_type is not None:
+            params["mediaType"] = media_type
+        return self._service_get_request("rest/api/content/{id}/child/attachment".format(id=content_id),
+                                         params=params, callback=callback)
+
+    def create_new_content(self, content_data, callback=None):
+        assert isinstance(content_data, dict) and set(content_data.keys()) >= self.NEW_CONTENT_REQUIRED_KEYS
+        return self._service_post_request("rest/api/content", data=json.dumps(content_data),
+                                          headers={'Content-Type': 'application/json'}, callback=callback)
+
+    def update_content_by_id(self, content_data, content_id, callback=None):
+        assert isinstance(content_data, dict) and set(content_data.keys()) >= self.UPDATE_CONTENT_REQUIRED_KEYS
+        return self._service_put_request("rest/api/content/{id}".format(content_id), data=json.dumps(content_data),
+                                         headers={'Content-Type': 'application/json'}, callback=callback)
+
+    def delete_content_by_id(self, content_id, status=None, callback=None):
+        params = {}
+        if status:
+            params["status"] = status
+        return self._service_delete_request("rest/api/content/{id}".format(content_id), params=params,
+                                            callback=callback)
