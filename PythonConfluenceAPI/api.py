@@ -201,6 +201,17 @@ class ConfluenceAPI(object):
         return self._service_get_request("rest/api/content/{id}/child/attachment".format(id=content_id),
                                          params=params, callback=callback)
 
+    def get_content_properties(self, content_id, expand=None, start=None, limit=None, callback=None):
+        params = {}
+        if expand:
+            params["expand"] = expand
+        if start is not None:
+            params["start"] = int(start)
+        if limit is not None:
+            params["limit"] = int(limit)
+        return self._service_get_request("rest/api/content/{id}/property".format(id=content_id),
+                                         params=params, callback=callback)
+
     def create_new_content(self, content_data, callback=None):
         assert isinstance(content_data, dict) and set(content_data.keys()) >= self.NEW_CONTENT_REQUIRED_KEYS
         return self._service_post_request("rest/api/content", data=json.dumps(content_data),
@@ -223,6 +234,13 @@ class ConfluenceAPI(object):
         return self._service_get_request("rest/api/content/{id}/label".format(id=content_id),
                                          data=json.dumps(label_names), headers={"Content-Type": "application/json"},
                                          callback=callback)
+
+    def create_new_content_property(self, content_id, content_property, callback=None):
+        assert isinstance(content_property, dict)
+        assert {"key", "value"} <= set(content_property.keys())
+        return self._service_post_request("rest/api/content/{id}/property".format(id=content_id),
+                                          data=json.dumps(content_property),
+                                          headers={"Content-Type": "application/json"}, callback=callback)
 
     def update_content_by_id(self, content_data, content_id, callback=None):
         assert isinstance(content_data, dict) and set(content_data.keys()) >= self.UPDATE_CONTENT_REQUIRED_KEYS
