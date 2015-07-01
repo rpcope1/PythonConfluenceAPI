@@ -1,9 +1,9 @@
 __author__ = "Robert Cope"
 
 import requests
+from requests.auth import HTTPBasicAuth
 from urlparse import urljoin
 import logging
-import base64
 try:
     import anyjson as json
 except ImportError:
@@ -24,7 +24,7 @@ class ConfluenceAPI(object):
     def __init__(self, username, password, uri_base, user_agent=DEFAULT_USER_AGENT):
         self.username = username
         self.password = password
-        self.uri_base = uri_base
+        self.uri_base = uri_base if uri_base.endswith('/') else uri_base + "/"
         self.user_agent = user_agent
         self.session = None
 
@@ -34,9 +34,7 @@ class ConfluenceAPI(object):
         self.session.headers.update({"User-Agent": self.user_agent})
         if self.username and self.password:
             api_logger.debug("Requests will use authorization.")
-            auth_str = "Basic "
-            auth_str += base64.standard_b64encode(":".join([self.username, self.password]))
-            self.session.headers.update({"Authorization": auth_str})
+            self.session.auth = HTTPBasicAuth(self.username, self.password)
 
     def _service_request(self, request_type, sub_uri, params=None, callback=None,
                          raise_for_status=True, raw=False, **kwargs):
@@ -167,7 +165,7 @@ class ConfluenceAPI(object):
         return self._service_get_request("rest/api/content/{id}/label".format(id=content_id), params=params,
                                          callback=callback)
 
-    def get_content_comments(self, content_id, child_type, expand=None, parent_version=None, start=None, limit=None,
+    def get_content_comments(self, content_id, expand=None, parent_version=None, start=None, limit=None,
                              location=None, depth=None, callback=None):
         params = {}
         if expand:
@@ -181,8 +179,9 @@ class ConfluenceAPI(object):
         if location:
             params["location"] = location
         if depth:
+            assert depth in {"", "all"}
             params["depth"] = depth
-        return self._service_get_request("rest/api/content/{id}/child/{type}".format(id=content_id, type=child_type),
+        return self._service_get_request("rest/api/content/{id}/child/comment".format(id=content_id),
                                          params=params, callback=callback)
 
     def get_content_attachments(self, content_id, expand=None, start=None, limit=None, filename=None, media_type=None,
