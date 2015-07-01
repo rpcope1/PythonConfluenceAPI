@@ -212,6 +212,98 @@ class ConfluenceAPI(object):
         return self._service_get_request("rest/api/content/{id}/property".format(id=content_id),
                                          params=params, callback=callback)
 
+    def get_property_by_content_id(self, content_id, property_key, expand=None, callback=None):
+        params = {}
+        if expand:
+            params["expand"] = expand
+        return self._service_get_request("rest/api/content/{id}/property/{key}".format(id=content_id, key=property_key),
+                                         params=params, callback=callback)
+
+    def get_op_restrictions_for_content_id(self, content_id, expand=None, callback=None):
+        params = {}
+        if expand:
+            params["expand"] = expand
+        return self._service_get_request("rest/api/content/{id}/restriction/byOperation".format(id=content_id),
+                                         params=params, callback=callback)
+
+    def get_op_restrictions_by_content_operation(self, content_id, operation_key, expand=None, start=None, limit=None,
+                                                 callback=None):
+        params = {}
+        if expand:
+            params["expand"] = expand
+        if start is not None:
+            params["start"] = int(start)
+        if limit is not None:
+            params["limit"] = int(limit)
+        return self._service_get_request("rest/api/content/{id}/restriction/byOperation/{opkey}"
+                                         "".format(id=content_id, opkey=operation_key),
+                                         params=params, callback=callback)
+
+    def get_long_tasks(self, expand=None, start=None, limit=None, callback=None):
+        params = {}
+        if expand:
+            params["expand"] = expand
+        if start is not None:
+            params["start"] = int(start)
+        if limit is not None:
+            params["limit"] = int(limit)
+        return self._service_get_request("rest/api/longtask", params=params, callback=callback)
+
+    def get_long_task_info(self, long_task_id, expand=None, callback=None):
+        params = {}
+        if expand:
+            params["expand"] = expand
+        return self._service_get_request("rest/api/longtask/{id}".format(id=long_task_id), params=params,
+                                         callback=callback)
+
+    def get_spaces(self, space_key=None, expand=None, start=None, limit=None, callback=None):
+        params = {}
+        if space_key:
+            params["spaceKey"] = space_key
+        if expand:
+            params["expand"] = expand
+        if start is not None:
+            params["start"] = int(start)
+        if limit is not None:
+            params["limit"] = int(limit)
+        return self._service_get_request("rest/api/space", params=params, callback=callback)
+
+    def get_space_information(self, space_key, expand=None, callback=None):
+        params = {}
+        if expand:
+            params["expand"] = expand
+        return self._service_get_request("rest/api/space/{key}".format(key=space_key),
+                                         params=params, callback=callback)
+
+    def get_space_content(self, space_key, depth=None, expand=None, start=None, limit=None, callback=None):
+        params = {}
+        if depth:
+            assert depth in {"all", "root"}
+            params["depth"] = depth
+        if expand:
+            params["expand"] = expand
+        if start is not None:
+            params["start"] = int(start)
+        if limit is not None:
+            params["limit"] = int(limit)
+        return self._service_get_request("rest/api/space/{key}/content".format(key=space_key),
+                                         params=params, callback=callback)
+
+    def get_space_content_by_type(self, space_key, content_type, depth=None, expand=None, start=None, limit=None,
+                                  callback=None):
+        params = {}
+        if depth:
+            assert depth in {"all", "root"}
+            params["depth"] = depth
+        if expand:
+            params["expand"] = expand
+        if start is not None:
+            params["start"] = int(start)
+        if limit is not None:
+            params["limit"] = int(limit)
+        return self._service_get_request("rest/api/space/{key}/content/{type}".format(key=space_key, type=content_type),
+                                         params=params, callback=callback)
+
     def create_new_content(self, content_data, callback=None):
         assert isinstance(content_data, dict) and set(content_data.keys()) >= self.NEW_CONTENT_REQUIRED_KEYS
         return self._service_post_request("rest/api/content", data=json.dumps(content_data),
@@ -235,11 +327,28 @@ class ConfluenceAPI(object):
                                          data=json.dumps(label_names), headers={"Content-Type": "application/json"},
                                          callback=callback)
 
+    def create_new_property(self, content_id, property_key, new_property_data, callback=None):
+        assert isinstance(new_property_data, dict) and {"key", "value"} <= set(new_property_data.keys())
+        return self._service_post_request("rest/api/content/{id}/property/{key}".format(id=content_id,
+                                                                                        key=property_key),
+                                          data=json.dumps(new_property_data),
+                                          headers={"Content-Type": "application/json"}, callback=callback)
+
     def create_new_content_property(self, content_id, content_property, callback=None):
         assert isinstance(content_property, dict)
         assert {"key", "value"} <= set(content_property.keys())
         return self._service_post_request("rest/api/content/{id}/property".format(id=content_id),
                                           data=json.dumps(content_property),
+                                          headers={"Content-Type": "application/json"}, callback=callback)
+
+    def create_new_space(self, space_definition, callback=None):
+        assert isinstance(space_definition, dict) and {"key", "name", "description"} <= set(space_definition.keys())
+        return self._service_post_request("rest/api/space", data=json.dumps(space_definition),
+                                          headers={"Content-Type": "application/json"}, callback=callback)
+
+    def create_new_private_space(self, space_definition, callback=None):
+        assert isinstance(space_definition, dict) and {"key", "name", "description"} <= set(space_definition.keys())
+        return self._service_post_request("rest/api/space/_private", data=json.dumps(space_definition),
                                           headers={"Content-Type": "application/json"}, callback=callback)
 
     def update_content_by_id(self, content_data, content_id, callback=None):
@@ -264,6 +373,26 @@ class ConfluenceAPI(object):
                                           headers={"X-Atlassian-Token": "nocheck"}, files=attachment,
                                           callback=callback)
 
+    def update_property(self, content_id, property_key, new_property_data, callback=None):
+        assert isinstance(new_property_data, dict) and {"key", "value", "version"} <= set(new_property_data.keys())
+        return self._service_put_request("rest/api/content/{id}/property/{key}".format(id=content_id, key=property_key),
+                                         data=json.dumps(new_property_data),
+                                         headers={"Content-Type": "application/json"}, callback=callback)
+
+    def update_space(self, space_key, space_definition, callback=None):
+        assert isinstance(space_definition, dict) and {"key", "name", "description"} <= set(space_definition.keys())
+        return self._service_put_request("rest/api/space/{key}".format(key=space_key),
+                                         data=json.dumps(space_definition),
+                                         headers={"Content-Type": "application/json"}, callback=callback)
+
+    def convert_contentbody_to_new_type(self, content_data, old_representation, new_representation, callback=None):
+        assert {old_representation, new_representation} < {"storage", "editor", "view", "export_view"}
+        # TODO: Enforce conversion rules better here.
+        request_data = {"value": str(content_data), "representation": old_representation}
+        return self._service_put_request("rest/api/contentbody/convert/{to}".format(to=new_representation),
+                                         data=json.dumps(request_data),
+                                         headers={"Content-Type": "application/json"}, callback=callback)
+
     def delete_content_by_id(self, content_id, status=None, callback=None):
         params = {}
         if status:
@@ -275,3 +404,11 @@ class ConfluenceAPI(object):
         params = {"name": label_name}
         return self._service_delete_request("rest/api/content/{id}/label".format(id=content_id),
                                             params=params, callback=callback)
+
+    def delete_property(self, content_id, property_key, callback=None):
+        return self._service_delete_request("rest/api/content/{id}/property/{key}"
+                                            "".format(id=content_id, key=property_key), callback=callback)
+
+    def delete_space(self, space_key, callback=None):
+        return self._service_delete_request("rest/api/space/{key}".format(key=space_key),
+                                            callback=callback)
