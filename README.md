@@ -1,3 +1,5 @@
+[![PyPI version](https://badge.fury.io/py/PythonConfluenceAPI.svg)](http://badge.fury.io/py/PythonConfluenceAPI)
+
 # PythonConfluenceAPI
 PythonConfluenceAPI is a Pythonic API wrapper over the Confluence REST API, which cleanly wraps *all* of the
 methods present in the current Confluence API spec, and is easily adapter to be used with minimal effort in other
@@ -23,4 +25,4 @@ look at the Atlassian API documentation for further info. Examples are also prov
 the repository.
 
 # License
-This repository was written for Pushrod Technology by Robert Cope, and is licensed as LGPLv3rds.
+This repository was written for Pushrod Technology by Robert Cope, and is licensed as LGPLv3.

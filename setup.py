@@ -1,6 +1,6 @@
 __author__ = 'Robert Cope', 'Pushrod Technology'
 __author_email__ = 'robert.cope@pushrodtechnology.com'
-__version__ = '0.0.1'
+__version__ = '0.0.1a'
 
 from setuptools import setup
 
