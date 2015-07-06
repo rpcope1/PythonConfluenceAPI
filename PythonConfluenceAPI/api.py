@@ -260,7 +260,7 @@ class ConfluenceAPI(object):
         :param cql_context (string): OPTIONAL: The context to execute a cql search in,
                                      this is the json serialized form of SearchContext
         :param expand (string): OPTIONAL: A comma separated list of properties to expand on the content. Default: Empty.
-        :param start (int): OPTIONAL: The start point of the collection to return
+        :param start (int): OPTIONAL: The start point of the collection to return. Default: 0
         :param limit (int): OPTIONAL: The limit of the number of items to return,
                                       this may be restricted by fixed system limits. Default: 25.
         :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
@@ -309,16 +309,55 @@ class ConfluenceAPI(object):
         return self._service_get_request("rest/api/content/{id}/child".format(id=content_id), params=params,
                                          callback=callback)
 
-    def get_content_children_by_type(self, content_id, child_type, expand=None, parent_version=None, callback=None):
+    def get_content_children_by_type(self, content_id, child_type, expand=None, parent_version=None,
+                                     start=None, limit=None, callback=None):
+        """
+        Returns the direct children of a piece of Content, limited to a single child type.
+
+        The {@link ContentType}(s) of the children returned is specified by the "type" path parameter in the request.
+        :param content_id (string): The ID of the content to retrieve children for.
+        :param child_type (string): A {@link ContentType} to filter children on.
+        :param expand (string): OPTIONAL: A comma separated list of properties to expand on the children.
+                                Default: None.
+        :param parent_version (int): OPTIONAL: An int representing the version of the content to retrieve children for.
+                               Default: 0 (latest).
+        :param start (int): OPTIONAL: The start point of the collection to return. Default: 0
+        :param limit (int): OPTIONAL: The limit of the number of items to return,
+                                      this may be restricted by fixed system limits. Default: 25.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/child/{type} endpoint, or the results of the callback.
+                 Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if expand:
             params["expand"] = expand
         if parent_version:
             params["parentVersion"] = parent_version
+        if start is not None:
+            params["start"] = int(start)
+        if limit is not None:
+            params["limit"] = int(limit)
         return self._service_get_request("rest/api/content/{id}/child/{type}".format(id=content_id, type=child_type),
                                          params=params, callback=callback)
 
     def get_content_descendants(self, content_id, expand=None, callback=None):
+        """
+        Returns a map of the descendants of a piece of Content. Content can have multiple types of descendants -
+        for example a Page can have descendants that are also Pages, but it can also have Comments and Attachments.
+
+        The {@link ContentType}(s) of the descendants returned is specified by the "expand" query parameter in the
+        request - this parameter can include expands for multiple descendant types.
+        If no types are included in the expand parameter, the map returned will just list the descendant types that
+        are available to be expanded for the {@link Content} referenced by the "content_id" parameter.
+        :param content_id (string): A string containing the id of the content to retrieve descendants for.
+        :param expand (string): OPTIONAL: A comma separated list of properties to expand on the descendants.
+                                Default: None.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/child/{type} endpoint, or the results of the callback.
+                 Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if expand:
             params["expand"] = expand
