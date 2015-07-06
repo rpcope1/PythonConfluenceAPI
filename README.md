@@ -23,4 +23,4 @@ look at the Atlassian API documentation for further info. Examples are also prov
 the repository.
 
 # License
-This repository was written for Pushrod Technology by Robert Cope, and is licensed as LGPLv2.
+This repository was written for Pushrod Technology by Robert Cope, and is licensed as LGPLv3rds.
