@@ -574,7 +574,7 @@ class ConfluenceAPI(object):
 
     def update_content_by_id(self, content_data, content_id, callback=None):
         assert isinstance(content_data, dict) and set(content_data.keys()) >= self.UPDATE_CONTENT_REQUIRED_KEYS
-        return self._service_put_request("rest/api/content/{id}".format(content_id), data=json.dumps(content_data),
+        return self._service_put_request("rest/api/content/{id}".format(id=content_id), data=json.dumps(content_data),
                                          headers={"Content-Type": "application/json"}, callback=callback)
 
     def update_attachment_metadata(self, content_id, attachment_id, new_metadata, callback=None):
@@ -618,7 +618,7 @@ class ConfluenceAPI(object):
         params = {}
         if status:
             params["status"] = status
-        return self._service_delete_request("rest/api/content/{id}".format(content_id), params=params,
+        return self._service_delete_request("rest/api/content/{id}".format(id=content_id), params=params,
                                             callback=callback)
 
     def delete_label_by_id(self, content_id, label_name, callback=None):
