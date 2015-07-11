@@ -725,11 +725,50 @@ class ConfluenceAPI(object):
                                          params=params, callback=callback)
 
     def create_new_content(self, content_data, callback=None):
+        """
+        Creates a new piece of Content.
+        :param content_data (dict): A dictionary representing the data for the new content. Must have keys:
+                                    "type", "title", "space", "body".
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+
+        Example content_data:
+            {
+                "type": "page",
+                "title": "Example Content title",
+                "space": {
+                    "key": "TST"
+                },
+                "body": {
+                    "storage": {
+                        "value": "<p>This is a new page</p>",
+                        "representation": "storage"
+                    }
+                }
+            }
+        """
         assert isinstance(content_data, dict) and set(content_data.keys()) >= self.NEW_CONTENT_REQUIRED_KEYS
         return self._service_post_request("rest/api/content", data=json.dumps(content_data),
                                           headers={"Content-Type": "application/json"}, callback=callback)
 
     def create_new_attachment_by_content_id(self, content_id, attachments, callback=None):
+        """
+        Add one or more attachments to a Confluence Content entity, with optional comments.
+
+        Comments are optional, but if included there must be as many comments as there are files, and the comments must
+        be in the same order as the files.
+        :param content_id (string): A string containing the id of the attachments content container.
+        :param attachments (list of dicts or dict): This is a list of dictionaries or a dictionary.
+                                                    Each dictionary must have the key
+                                                    "file" with a value that is I/O like (file, StringIO, etc.), and
+                                                    may also have a key "comment" with a string for file comments.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/child/attachment endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         if isinstance(attachments, list):
             assert all(isinstance(at, dict) and "file" in at.keys() for at in attachments)
         elif isinstance(attachments, dict):
@@ -741,6 +780,15 @@ class ConfluenceAPI(object):
                                           callback=callback)
 
     def create_new_label_by_content_id(self, content_id, label_names, callback=None):
+        """
+        Adds a list of labels to the specified content.
+        :param content_id (string): A string containing the id of the labels content container.
+        :param label_names (list): A list of labels (strings) to apply to the content.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/label endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         assert isinstance(label_names, list)
         assert all(isinstance(ln, dict) and set(ln.keys) == {"prefix", "name"} for ln in label_names)
         return self._service_get_request("rest/api/content/{id}/label".format(id=content_id),
@@ -748,6 +796,26 @@ class ConfluenceAPI(object):
                                          callback=callback)
 
     def create_new_property(self, content_id, property_key, new_property_data, callback=None):
+        """
+        Creates a new content property. This appears to be a duplicate at the REST API level of
+            the endpoint for create_new_content_property.
+        :param content_id (string): A string containing the id of the property content container.
+        :param property_key (string): The key for the new property (no idea what happens if this is inconsistent).
+        :param new_property_data (dict): A dictionary describing the new property for the content. Must have the keys
+                                         "key" and "value".
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/property/{key} endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+
+        Example property data:
+        {
+            "key": "example-property-key",
+            "value": {
+                "anything": "goes"
+            }
+        }
+        """
         assert isinstance(new_property_data, dict) and {"key", "value"} <= set(new_property_data.keys())
         return self._service_post_request("rest/api/content/{id}/property/{key}".format(id=content_id,
                                                                                         key=property_key),
@@ -755,6 +823,25 @@ class ConfluenceAPI(object):
                                           headers={"Content-Type": "application/json"}, callback=callback)
 
     def create_new_content_property(self, content_id, content_property, callback=None):
+        """
+        Creates a new content property. Potentially a duplicate at the REST API level of
+        create_new_property.
+        :param content_id (string): A string containing the id of the property content container.
+        :param new_property_data (dict): A dictionary describing the new property for the content. Must have the keys
+                                         "key" and "value".
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/property endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+
+        Example property data:
+        {
+            "key": "example-property-key",
+            "value": {
+                "anything": "goes"
+            }
+        }
+        """
         assert isinstance(content_property, dict)
         assert {"key", "value"} <= set(content_property.keys())
         return self._service_post_request("rest/api/content/{id}/property".format(id=content_id),
@@ -762,11 +849,57 @@ class ConfluenceAPI(object):
                                           headers={"Content-Type": "application/json"}, callback=callback)
 
     def create_new_space(self, space_definition, callback=None):
+        """
+        Creates a new Space.
+
+        The incoming Space does not include an id, but must include a Key and Name, and should include a Description.
+        :param space_definition (dict): The dictionary describing the new space. Must include keys "key", "name",
+                                        and "description".
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the space endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+
+        Example space data:
+        {
+            "key": "TST",
+            "name": "Example space",
+            "description": {
+                "plain": {
+                    "value": "This is an example space",
+                    "representation": "plain"
+                }
+            }
+        }
+        """
         assert isinstance(space_definition, dict) and {"key", "name", "description"} <= set(space_definition.keys())
         return self._service_post_request("rest/api/space", data=json.dumps(space_definition),
                                           headers={"Content-Type": "application/json"}, callback=callback)
 
     def create_new_private_space(self, space_definition, callback=None):
+        """
+        Creates a new private Space, viewable only by its creator.
+
+        The incoming Space does not include an id, but must include a Key and Name, and should include a Description.
+        :param space_definition (dict): The dictionary describing the new space. Must include keys "key", "name",
+                                        and "description".
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the space/_private endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+
+        Example space data:
+        {
+            "key": "TST",
+            "name": "Example space",
+            "description": {
+                "plain": {
+                    "value": "This is an example space",
+                    "representation": "plain"
+                }
+            }
+        }
+        """
         assert isinstance(space_definition, dict) and {"key", "name", "description"} <= set(space_definition.keys())
         return self._service_post_request("rest/api/space/_private", data=json.dumps(space_definition),
                                           headers={"Content-Type": "application/json"}, callback=callback)
