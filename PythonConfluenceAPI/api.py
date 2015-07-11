@@ -366,6 +366,25 @@ class ConfluenceAPI(object):
 
     def get_content_descendants_by_type(self, content_id, child_type, expand=None, start=None, limit=None,
                                         callback=None):
+        """
+        Returns the direct descendants of a piece of Content, limited to a single descendant type.
+
+        The {@link ContentType}(s) of the descendants returned is specified by the "type" path parameter in the request.
+
+        Currently the only supported descendants are comment descendants of non-comment Content.
+        :param content_id (string): A string containing the id of the content to retrieve descendants for
+        :param child_type (string): A {@link ContentType} to filter descendants on.
+        :param expand (string): OPTIONAL: A comma separated list of properties to expand on the descendants.
+                                Default: Empty
+        :param start (int): OPTIONAL: The index of the first item within the result set that should be returned.
+                            Default: 0.
+        :param limit (int): OPTIONAL: How many items should be returned after the start index.
+                            Default: 25 or site limit.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/descendant/{type} endpoint, or the results of the
+                 callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if expand:
             params["expand"] = expand
@@ -377,6 +396,19 @@ class ConfluenceAPI(object):
                                          "".format(id=content_id, type=child_type), params=params, callback=callback)
 
     def get_content_labels(self, content_id, prefix=None, start=None, limit=None, callback=None):
+        """
+        Returns the list of labels on a piece of Content.
+        :param content_id (string): A string containing the id of the labels content container.
+        :param prefix (string): OPTIONAL: The prefixes to filter the labels with {@see Label.Prefix}.
+                                Default: None.
+        :param start (int): OPTIONAL: The start point of the collection to return. Default: None (0).
+        :param limit (int): OPTIONAL: The limit of the number of labels to return, this may be restricted by
+                            fixed system limits. Default: 200.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/label endpoint, or the results of the
+                 callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if prefix:
             params["prefix"] = prefix
@@ -389,6 +421,27 @@ class ConfluenceAPI(object):
 
     def get_content_comments(self, content_id, expand=None, parent_version=None, start=None, limit=None,
                              location=None, depth=None, callback=None):
+        """
+        Returns the comments associated with a piece of content.
+        :param content_id (string): A string containing the id of the content to retrieve children for.
+        :param expand (string): OPTIONAL: a comma separated list of properties to expand on the children.
+                                We can also specify some extensions such as extensions.inlineProperties (for getting
+                                inline comment-specific properties) or extensions.resolution for the resolution status
+                                of each comment in the results. Default: Empty
+        :param parent_version (int): OPTIONAL: An int representing the version of the content to retrieve children for.
+                                     Default: 0
+        :param start (int): OPTIONAL: The index of the first item within the result set that should be returned.
+                            Default: 0.
+        :param limit (int): OPTIONAL: How many items should be returned after the start index. Default: Site limit.
+        :param location (string): OPTIONAL: The location of the comments. Possible values are: "inline", "footer",
+                                  "resolved". You can define multiple location params. The results will be the comments
+                                  matched by any location. Default: "" (all).
+        :param depth: The depth of the comments. Possible values are: "" (ROOT only), "all". Default: "".
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/child/comment endpoint, or the results of the
+                 callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if expand:
             params["expand"] = expand
@@ -408,6 +461,23 @@ class ConfluenceAPI(object):
 
     def get_content_attachments(self, content_id, expand=None, start=None, limit=None, filename=None, media_type=None,
                                 callback=None):
+        """
+        Returns a paginated list of attachment Content entities within a single container.
+        :param content_id (string): A string containing the id of the attachments content container.
+        :param expand (string): OPTIONAL: A comma separated list of properties to expand on the Attachments returned.
+                                Default: Empty.
+        :param start (int): OPTIONAL: The index of the first item within the result set that should be returned.
+                            Default: None (0).
+        :param limit (int): OPTIONAL: How many items should be returned after the start index. Default: 50
+        :param filename (string): OPTIONAL: A filter parameter to return only the Attachment with the matching file
+                                  name. Default: None.
+        :param media_type: OPTIONAL: A filter parameter to return only Attachments with a matching Media-Type.
+                           Default: None.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/child/attachment endpoint, or the results of the
+                 callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if expand:
             params["expand"] = expand
@@ -423,6 +493,22 @@ class ConfluenceAPI(object):
                                          params=params, callback=callback)
 
     def get_content_properties(self, content_id, expand=None, start=None, limit=None, callback=None):
+        """
+        Returns a paginated list of content properties.
+
+        Content properties are a key / value store of properties attached to a piece of Content.
+        The key is a string, and the value is a JSON-serializable object.
+        :param content_id (string): A string containing the id of the property content container.
+        :param expand (string): OPTIONAL: A comma separated list of properties to expand on the content properties.
+                                Default: Empty.
+        :param start (int): OPTIONAL: The start point of the collection to return. Default: None (0).
+        :param limit (int): OPTIONAL: The limit of the number of items to return, this may be restricted by fixed
+                            system limits. Default: 10.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/property endpoint, or the results of the
+                 callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if expand:
             params["expand"] = expand
@@ -433,7 +519,18 @@ class ConfluenceAPI(object):
         return self._service_get_request("rest/api/content/{id}/property".format(id=content_id),
                                          params=params, callback=callback)
 
-    def get_property_by_content_id(self, content_id, property_key, expand=None, callback=None):
+    def get_content_property_by_key(self, content_id, property_key, expand=None, callback=None):
+        """
+        Returns a content property.
+        :param content_id (string): A string containing the id of the property content container.
+        :param property_key (string): The key associated with the property requested.
+        :param expand (string): OPTIONAL: A comma separated list of properties to expand on the content properties.
+                                Default value: "version"
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/property/{key} endpoint, or the results of the
+                 callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if expand:
             params["expand"] = expand
@@ -441,6 +538,19 @@ class ConfluenceAPI(object):
                                          params=params, callback=callback)
 
     def get_op_restrictions_for_content_id(self, content_id, expand=None, callback=None):
+        """
+        Returns info about all restrictions by operation for a given piece of content.
+        :param content_id (string): The content ID to query on.
+        :param expand (string): OPTIONAL: A comma separated list of properties to expand on the content properties.
+                                Default: This is unclear. The REST documentations claims that both are default:
+                                    "group"
+                                    "update.restrictions.user,read.restrictions.group,read.restrictions.user,
+                                    update.restrictions.group"
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/restriction/byOperation endpoint, or the results of the
+                 callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if expand:
             params["expand"] = expand
@@ -449,6 +559,22 @@ class ConfluenceAPI(object):
 
     def get_op_restrictions_by_content_operation(self, content_id, operation_key, expand=None, start=None, limit=None,
                                                  callback=None):
+        """
+        Returns info about all restrictions of given operation.
+        :param content_id (string): The content ID to query on.
+        :param operation_key (string): The operation key to query on.
+        :param expand (string): OPTIONAL: A comma separated list of properties to expand on the content properties.
+                                Default: Again, this is unclear/inconsistent when reading documentation. The REST
+                                    documentation claims that both are default:
+                                        "group"
+                                        "restrictions.user,restrictions.group"
+        :param start (int): Pagination start count.
+        :param limit (int): Pagination return count limit.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/restriction/byOperation/{operationKey} endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if expand:
             params["expand"] = expand
@@ -461,6 +587,16 @@ class ConfluenceAPI(object):
                                          params=params, callback=callback)
 
     def get_long_tasks(self, expand=None, start=None, limit=None, callback=None):
+        """
+        Returns information about all tracked long-running tasks.
+        :param expand (string): OPTIONAL: A comma separated list of properties to expand on the tasks.
+        :param start (int): OPTIONAL: The pagination start count.
+        :param limit (int): OPTIONAL: The pagination return count limit.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the longtask endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if expand:
             params["expand"] = expand
@@ -471,6 +607,15 @@ class ConfluenceAPI(object):
         return self._service_get_request("rest/api/longtask", params=params, callback=callback)
 
     def get_long_task_info(self, long_task_id, expand=None, callback=None):
+        """
+        Returns information about a long-running task.
+        :param long_task_id (string): The key of the task to be returned.
+        :param expand (string): A comma separated list of properties to expand on the task. Default: Empty
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the longtask/{id} endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if expand:
             params["expand"] = expand
@@ -478,6 +623,19 @@ class ConfluenceAPI(object):
                                          callback=callback)
 
     def get_spaces(self, space_key=None, expand=None, start=None, limit=None, callback=None):
+        """
+        Returns information about the spaces present in the Confluence instance.
+        :param space_key (string): OPTIONAL: A list of space keys to filter on. Default: None.
+        :param expand (string): OPTIONAL: A comma separated list of properties to expand on the spaces.
+                                Default: Empty
+        :param start (int): OPTIONAL: The start point of the collection to return. Default: 0.
+        :param limit (int): OPTIONAL: A limit of the number of spaces to return, this could be restricted by fixed
+                            system limits. Default: 25.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the space endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if space_key:
             params["spaceKey"] = space_key
@@ -490,6 +648,15 @@ class ConfluenceAPI(object):
         return self._service_get_request("rest/api/space", params=params, callback=callback)
 
     def get_space_information(self, space_key, expand=None, callback=None):
+        """
+        Returns information about a space.
+        :param space_key (string): A string containing the key of the space.
+        :param expand (string): OPTIONAL: A comma separated list of properties to expand on the space. Default: Empty.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the space/{spaceKey} endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if expand:
             params["expand"] = expand
@@ -497,6 +664,21 @@ class ConfluenceAPI(object):
                                          params=params, callback=callback)
 
     def get_space_content(self, space_key, depth=None, expand=None, start=None, limit=None, callback=None):
+        """
+        Returns the content in this given space.
+        :param space_key (string): A string containing the key of the space.
+        :param depth (string): OPTIONAL: A string indicating if all content, or just the root content of the space is
+                               returned. Default: "all". Valid values: "all", "root".
+        :param expand (string): OPTIONAL: A comma separated list of properties to expand on each piece of content
+                                retrieved. Default: Empty.
+        :param start (int): OPTIONAL: The start point of the collection to return. Default: 0.
+        :param limit (int): OPTIONAL: The limit of the number of labels to return, this may be restricted by fixed
+                            system limits. Default: 25.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the space/{spaceKey}/content endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if depth:
             assert depth in {"all", "root"}
@@ -512,6 +694,23 @@ class ConfluenceAPI(object):
 
     def get_space_content_by_type(self, space_key, content_type, depth=None, expand=None, start=None, limit=None,
                                   callback=None):
+        """
+        Returns the content in this given space with the given type.
+        :param space_key (string): A string containing the key of the space.
+        :param content_type (string): The type of content to return with the space. Valid values: "page", "blogpost".
+        :param depth (string): OPTIONAL: A string indicating if all content, or just the root content of the space is
+                               returned. Default: "all". Valid values: "all", "root".
+        :param expand (string): OPTIONAL: A comma separated list of properties to expand on each piece of content
+                                retrieved. Default: Empty.
+        :param start (int): OPTIONAL: The start point of the collection to return. Default: 0.
+        :param limit (int): OPTIONAL: The limit of the number of labels to return, this may be restricted by fixed
+                            system limits. Default: 25.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the space/{spaceKey}/content/{type} endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+        """
+        assert content_type in ["page", "blogpost"]
         params = {}
         if depth:
             assert depth in {"all", "root"}
