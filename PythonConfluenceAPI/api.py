@@ -905,11 +905,73 @@ class ConfluenceAPI(object):
                                           headers={"Content-Type": "application/json"}, callback=callback)
 
     def update_content_by_id(self, content_data, content_id, callback=None):
+        """
+        Updates a piece of Content, or restores if it is trashed.
+
+        The body contains the representation of the content. Must include the new version number.
+
+        To restore a piece of content that has the status of trashed the content must have it's version incremented,
+        and status set to current. No other field modifications will be performed when restoring a piece of content
+        from the trash.
+
+        Request example to restore from trash: { "id": "557059", "status": "current", "version": { "number": 2 } }
+        :param content_data (dict): The content data (with desired updates). This should be retrieved via the API
+                                    call to get content data, then modified to desired state. Required keys are:
+                                    "id", "type", "title", "space", "version", and "body".
+        :param content_id (string): The id of the content to update.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id} endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+
+        Example content data:
+        {
+            "id": "3604482",
+            "type": "page",
+            "title": "Example Content title",
+            "space": {
+                "key": "TST"
+            },
+            "version": {
+                "number": 2,
+                "minorEdit": false
+            },
+            "body": {
+                "storage": {
+                    "value": "<p>This is the updated text for the new page</p>",
+                    "representation": "storage"
+                }
+            }
+        }
+        """
         assert isinstance(content_data, dict) and set(content_data.keys()) >= self.UPDATE_CONTENT_REQUIRED_KEYS
         return self._service_put_request("rest/api/content/{id}".format(id=content_id), data=json.dumps(content_data),
                                          headers={"Content-Type": "application/json"}, callback=callback)
 
     def update_attachment_metadata(self, content_id, attachment_id, new_metadata, callback=None):
+        """
+        Update the non-binary data of an Attachment.
+
+        This resource can be used to update an attachment's filename, media-type, comment, and parent container.
+        :param content_id (string): A string containing the ID of the attachments content container.
+        :param attachment_id (string): The ID of the attachment to update.
+        :param new_metadata (dict): The updated metadata for the attachment.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/child/attachment/{attachment_id} endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+
+        Example attachment metadata:
+        {
+            "id": "att5678",
+            "type": "attachment",
+            "title": "new_file_name.txt",
+            "version": {
+                "number": 2,
+                "minorEdit": false
+            }
+        }
+        """
         assert isinstance(new_metadata, dict) and set(new_metadata.keys()) >= self.ATTACHMENT_METADATA_KEYS
         return self._service_put_request("rest/api/content/{id}/child/attachment/{attachment_id}"
                                          "".format(id=content_id, attachment_id=attachment_id),
@@ -917,6 +979,25 @@ class ConfluenceAPI(object):
                                          callback=callback)
 
     def update_attachment(self, content_id, attachment_id, attachment, callback=None):
+        """
+        Update the binary data of an Attachment, and optionally the comment and the minor edit field.
+
+        This adds a new version of the attachment, containing the new binary data, filename, and content-type.
+
+        When updating the binary data of an attachment, the comment related to it together with the field that
+        specifies if it's a minor edit can be updated as well, but are not required. If an update is considered to be a
+        minor edit, notifications will not be sent to the watchers of that content.
+        :param content_id (string): A string containing the id of the attachments content container.
+        :param attachment_id (string): The id of the attachment to upload a new file for.
+        :param attachment (dict): The dictionary describing the attachment to upload. The dict must have a key "file",
+                                  which has a value that is an I/O object (file, StringIO, etc.), and can also
+                                  have a "comment" key describing the attachment, and a "minorEdit" key, which is a
+                                  boolean used to flag that the changes to the attachment are not substantial.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{content_id}/child/attachment/{attachment_id}/data endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         if isinstance(attachment, dict):
             assert "file" in attachment.keys()
         else:
@@ -927,18 +1008,90 @@ class ConfluenceAPI(object):
                                           callback=callback)
 
     def update_property(self, content_id, property_key, new_property_data, callback=None):
+        """
+        Updates a content property.
+
+        The body contains the representation of the content property. Must include the property id, and the new version
+        number. Attempts to create a new content property if the given version number is 1, just like
+        {@link #create(com.atlassian.confluence.api.model.content.id.ContentId, String,
+            com.atlassian.confluence.api.model.content.JsonContentProperty)}.
+        :param content_id (string): The ID for the content to attach the property to.
+        :param property_key (string): The key for the property to update.
+        :param new_property_data (dict): The updated property data. This requires the keys "key", "value", and
+                                         "version".
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id}/property/{key} endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+
+        Example updated property data:
+        {
+            "key": "example-property-key",
+            "value": {
+                "anything": "goes"
+            },
+            "version": {
+                "number": 2,
+                "minorEdit": false
+            }
+        }
+        """
         assert isinstance(new_property_data, dict) and {"key", "value", "version"} <= set(new_property_data.keys())
         return self._service_put_request("rest/api/content/{id}/property/{key}".format(id=content_id, key=property_key),
                                          data=json.dumps(new_property_data),
                                          headers={"Content-Type": "application/json"}, callback=callback)
 
     def update_space(self, space_key, space_definition, callback=None):
+        """
+        Updates a Space.
+
+        Currently only the Space name, description and homepage can be updated.
+        :param space_key (string): The key of the space to update.
+        :param space_definition (dict): The dictionary describing the updated space metadata. This should include
+                                        "key", "name" and "description".
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the space/{key} endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+
+        Example updated space definition:
+        {
+            "key": "TST",
+            "name": "Example space",
+            "description": {
+                "plain": {
+                    "value": "This is an example space",
+                    "representation": "plain"
+                }
+            }
+        }
+        """
         assert isinstance(space_definition, dict) and {"key", "name", "description"} <= set(space_definition.keys())
         return self._service_put_request("rest/api/space/{key}".format(key=space_key),
                                          data=json.dumps(space_definition),
                                          headers={"Content-Type": "application/json"}, callback=callback)
 
     def convert_contentbody_to_new_type(self, content_data, old_representation, new_representation, callback=None):
+        """
+        Converts between content body representations.
+
+        Not all representations can be converted to/from other formats. Supported conversions:
+
+        Source Representation |   Destination Representation Supported
+        --------------------------------------------------------------
+        "storage"               |   "view","export_view","editor"
+        "editor"                |   "storage"
+        "view"                  |   None
+        "export_view"           |   None
+
+        :param content_data (string): The content data to transform.
+        :param old_representation (string): The representation to convert from.
+        :param new_representation (string): The representation to convert to.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the contentbody/convert/{to} endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         assert {old_representation, new_representation} < {"storage", "editor", "view", "export_view"}
         # TODO: Enforce conversion rules better here.
         request_data = {"value": str(content_data), "representation": old_representation}
@@ -947,6 +1100,16 @@ class ConfluenceAPI(object):
                                          headers={"Content-Type": "application/json"}, callback=callback)
 
     def delete_content_by_id(self, content_id, status=None, callback=None):
+        """
+        Trashes or purges a piece of Content, based on its {@link ContentType} and {@link ContentStatus}.
+        :param content_id (string): The ID for the content to remove.
+        :param status (string): OPTIONAL: A status code to query for the location (?) of the content.
+                                The REST API suggests you might use "trashed". Default: Empty.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: The JSON data returned from the content/{id} endpoint,
+                 or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {}
         if status:
             params["status"] = status
@@ -954,14 +1117,52 @@ class ConfluenceAPI(object):
                                             callback=callback)
 
     def delete_label_by_id(self, content_id, label_name, callback=None):
+        """
+        Deletes a labels to the specified content.
+
+        There is an alternative form of this delete method that is not implemented. A DELETE request to
+        /rest/api/content/{id}/label/{label} will also delete a label, but is more limited in the label name
+        that can be accepted (and has no real apparent upside).
+
+        :param content_id (string): A string containing the id of the labels content container.
+        :param label_name (string): OPTIONAL: The name of the label to be removed from the content.
+                                    Default: Empty (probably deletes all labels).
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: Empty if successful, or the results of the callback.
+                 Will raise requests.HTTPError on bad input, potentially.
+        """
         params = {"name": label_name}
         return self._service_delete_request("rest/api/content/{id}/label".format(id=content_id),
                                             params=params, callback=callback)
 
     def delete_property(self, content_id, property_key, callback=None):
+        """
+        Deletes a content property.
+        :param content_id (string): The ID for the content that owns the property to be deleted.
+        :param property_key (string): The name of the property to be deleted.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: Empty if successful, or the results of the callback.
+                 Will raise requests.HTTPError on bad input, potentially.
+        """
         return self._service_delete_request("rest/api/content/{id}/property/{key}"
                                             "".format(id=content_id, key=property_key), callback=callback)
 
+    # TODO: Determine if this can be polled via the longtask method or if a custom link polling method needs to be
+    # TODO: added.
     def delete_space(self, space_key, callback=None):
+        """
+        Deletes a Space.
+
+        The space is deleted in a long running task, so the space cannot be considered deleted when this method returns.
+        Clients can follow the status link in the response and poll it until the task completes.
+
+        :param space_key (string): The key of the space to delete.
+        :param callback: OPTIONAL: The callback to execute on the resulting data, before the method returns.
+                         Default: None (no callback, raw data returned).
+        :return: A pointer to the longpoll task if successful, or the results of the callback.
+                 Will raise requests.HTTPError on bad input, potentially.
+        """
         return self._service_delete_request("rest/api/space/{key}".format(key=space_key),
                                             callback=callback)
