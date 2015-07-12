@@ -1,5 +1,7 @@
 [![PyPI version](https://badge.fury.io/py/PythonConfluenceAPI.svg)](http://badge.fury.io/py/PythonConfluenceAPI)
 
+![Alt Text](https://raw.githubusercontent.com/pushrodtechnology/PythonConfluenceAPI/master/pythonconfluenceapilight.png "PythonConfluenceAPI")
+
 # PythonConfluenceAPI
 PythonConfluenceAPI is a Pythonic API wrapper over the Confluence REST API, which cleanly wraps *all* of the
 methods present in the current Confluence API spec, and is easily adapter to be used with minimal effort in other
