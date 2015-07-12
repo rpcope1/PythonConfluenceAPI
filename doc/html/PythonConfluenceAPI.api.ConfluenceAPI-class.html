@@ -30,7 +30,12 @@
       <th>&nbsp;&nbsp;&nbsp;<a
         href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
 
-      <th class="navbar" width="100%"></th>
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/pushrodtechnology/PythonConfluenceAPI">PythonConfluenceAPI</a></th>
+          </tr></table></th>
   </tr>
 </table>
 <table width="100%" cellpadding="0" cellspacing="0">
@@ -56,7 +61,7 @@
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class ConfluenceAPI</h1><p class="nomargin-top"><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class ConfluenceAPI</h1><p class="nomargin-top"></p>
 <pre class="base-tree">
 object --+
          |
@@ -94,7 +99,7 @@ object --+
         <span class="summary-sig-arg">user_agent</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">PythonConfluenceAPI</code><code class="variable-quote">'</code></span>)</span><br />
       Initialize the API object.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.__init__">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -111,7 +116,7 @@ object --+
           <td><span class="summary-sig"><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#_start_http_session" class="summary-sig-name" onclick="show_private();">_start_http_session</a>(<span class="summary-sig-arg">self</span>)</span><br />
       Start a new requests HTTP session, clearing cookies and session data.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI._start_http_session">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -135,7 +140,7 @@ object --+
         <span class="summary-sig-arg">**kwargs</span>)</span><br />
       Base method for handling HTTP requests via the current requests session.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI._service_request">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -155,7 +160,7 @@ object --+
       GET request wrapper :param args: Positional arguments for 
       _service_request method.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI._service_get_request">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -175,7 +180,7 @@ object --+
       POST request wrapper :param args: Positional arguments for 
       _service_request method.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI._service_post_request">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -195,7 +200,7 @@ object --+
       DELETE request wrapper :param args: Positional arguments for 
       _service_request method.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI._service_delete_request">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -215,7 +220,7 @@ object --+
       PUT request wrapper :param args: Positional arguments for 
       _service_request method.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI._service_put_request">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -241,7 +246,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns a paginated list of Content.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -263,7 +268,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns a piece of Content.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_by_id">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -284,7 +289,7 @@ object --+
       Returns the history of a particular piece of content
 :param content_id (string): The id of the content.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_history_by_id">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -305,7 +310,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns the body of a macro (in storage format) with the given hash.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_macro_by_hash">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -326,7 +331,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns the body of a macro (in storage format) with the given id.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_macro_by_macro_id">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -349,7 +354,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Fetch a list of content using the Confluence Query Language (CQL).</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.search_content">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -370,7 +375,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns a map of the direct children of a piece of Content.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_children">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -394,7 +399,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns the direct children of a piece of Content, limited to a single child type.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_children_by_type">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -414,7 +419,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns a map of the descendants of a piece of Content.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_descendants">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -437,7 +442,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns the direct descendants of a piece of Content, limited to a single descendant type.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_descendants_by_type">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -459,7 +464,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns the list of labels on a piece of Content.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_labels">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -484,7 +489,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns the comments associated with a piece of content.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_comments">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -508,7 +513,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns a paginated list of attachment Content entities within a single container.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_attachments">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -530,7 +535,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns a paginated list of content properties.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_properties">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -551,7 +556,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns a content property.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_property_by_key">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -571,7 +576,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns info about all restrictions by operation for a given piece of content.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_op_restrictions_for_content_id">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -594,7 +599,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns info about all restrictions of given operation.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_op_restrictions_by_content_operation">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -615,7 +620,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns information about all tracked long-running tasks.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_long_tasks">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -635,7 +640,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns information about a long-running task.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_long_task_info">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -657,7 +662,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns information about the spaces present in the Confluence instance.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_spaces">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -677,7 +682,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns information about a space.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_space_information">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -700,7 +705,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns the content in this given space.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_space_content">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -724,7 +729,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Returns the content in this given space with the given type.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_space_content_by_type">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -743,7 +748,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Creates a new piece of Content.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.create_new_content">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -763,7 +768,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Add one or more attachments to a Confluence Content entity, with optional comments.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.create_new_attachment_by_content_id">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -783,7 +788,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Adds a list of labels to the specified content.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.create_new_label_by_content_id">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -804,7 +809,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Creates a new content property.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.create_new_property">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -824,7 +829,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Creates a new content property.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.create_new_content_property">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -843,7 +848,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Creates a new Space.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.create_new_space">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -862,7 +867,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Creates a new private Space, viewable only by its creator.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.create_new_private_space">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -882,7 +887,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Updates a piece of Content, or restores if it is trashed.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.update_content_by_id">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -903,7 +908,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Update the non-binary data of an Attachment.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.update_attachment_metadata">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -924,7 +929,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Update the binary data of an Attachment, and optionally the comment and the minor edit field.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.update_attachment">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -945,7 +950,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Updates a content property.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.update_property">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -965,7 +970,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Updates a Space.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.update_space">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -986,7 +991,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Converts between content body representations.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.convert_contentbody_to_new_type">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -1006,7 +1011,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Trashes or purges a piece of Content, based on its {@link ContentType} and {@link ContentStatus}.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.delete_content_by_id">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -1026,7 +1031,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Deletes a labels to the specified content.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.delete_label_by_id">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -1046,7 +1051,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Deletes a content property.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.delete_property">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -1065,7 +1070,7 @@ object --+
         <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
       Deletes a Space.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.delete_space">source&nbsp;code</a></span>
+            
             
           </td>
         </tr>
@@ -1196,7 +1201,7 @@ object --+
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.__init__">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1227,7 +1232,7 @@ Initialize the API object.
   <h3 class="epydoc"><span class="sig"><span class="sig-name">_start_http_session</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI._start_http_session">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1254,7 +1259,7 @@ Initialize the API object.
         <span class="sig-arg">**kwargs</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI._service_request">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1293,7 +1298,7 @@ Base method for handling HTTP requests via the current requests session.
         <span class="sig-arg">**kwargs</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI._service_get_request">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1317,7 +1322,7 @@ Base method for handling HTTP requests via the current requests session.
         <span class="sig-arg">**kwargs</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI._service_post_request">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1341,7 +1346,7 @@ Base method for handling HTTP requests via the current requests session.
         <span class="sig-arg">**kwargs</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI._service_delete_request">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1365,7 +1370,7 @@ Base method for handling HTTP requests via the current requests session.
         <span class="sig-arg">**kwargs</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI._service_put_request">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1396,7 +1401,7 @@ Base method for handling HTTP requests via the current requests session.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1442,7 +1447,7 @@ Returns a paginated list of Content.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_by_id">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1479,7 +1484,7 @@ Returns a piece of Content.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_history_by_id">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1513,7 +1518,7 @@ Returns the history of a particular piece of content
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_macro_by_hash">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1561,7 +1566,7 @@ stored macroId. This will allow add ons to work during the migration period.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_macro_by_macro_id">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1605,7 +1610,7 @@ propagate out to all instances.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.search_content">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1644,7 +1649,7 @@ See: Advanced searching using CQL (https://developer.atlassian.com/display/CONFD
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_children">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1690,7 +1695,7 @@ are available to be expanded for the {@link Content} referenced by the &quot;con
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_children_by_type">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1731,7 +1736,7 @@ The {@link ContentType}(s) of the children returned is specified by the &quot;ty
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_descendants">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1773,7 +1778,7 @@ are available to be expanded for the {@link Content} referenced by the &quot;con
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_descendants_by_type">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1817,7 +1822,7 @@ Currently the only supported descendants are comment descendants of non-comment 
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_labels">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1858,7 +1863,7 @@ Returns the list of labels on a piece of Content.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_comments">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1906,7 +1911,7 @@ Returns the comments associated with a piece of content.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_attachments">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1948,7 +1953,7 @@ Returns a paginated list of attachment Content entities within a single containe
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_properties">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -1988,7 +1993,7 @@ The key is a string, and the value is a JSON-serializable object.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_content_property_by_key">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2022,7 +2027,7 @@ Returns a content property.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_op_restrictions_for_content_id">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2061,7 +2066,7 @@ Returns info about all restrictions by operation for a given piece of content.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_op_restrictions_by_content_operation">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2101,7 +2106,7 @@ Returns info about all restrictions of given operation.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_long_tasks">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2134,7 +2139,7 @@ Returns information about all tracked long-running tasks.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_long_task_info">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2168,7 +2173,7 @@ Returns information about a long-running task.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_spaces">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2204,7 +2209,7 @@ Returns information about the spaces present in the Confluence instance.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_space_information">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2239,7 +2244,7 @@ Returns information about a space.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_space_content">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2281,7 +2286,7 @@ Returns the content in this given space.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.get_space_content_by_type">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2319,7 +2324,7 @@ Returns the content in this given space with the given type.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.create_new_content">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2366,7 +2371,7 @@ Example content_data:
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.create_new_attachment_by_content_id">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2404,7 +2409,7 @@ be in the same order as the files.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.create_new_label_by_content_id">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2437,7 +2442,7 @@ Adds a list of labels to the specified content.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.create_new_property">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2480,7 +2485,7 @@ Example property data:
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.create_new_content_property">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2521,7 +2526,7 @@ Example property data:
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.create_new_space">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2566,7 +2571,7 @@ Example space data:
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.create_new_private_space">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2612,7 +2617,7 @@ Example space data:
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.update_content_by_id">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2675,7 +2680,7 @@ Example content data:
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.update_attachment_metadata">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2722,7 +2727,7 @@ Example attachment metadata:
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.update_attachment">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2765,7 +2770,7 @@ minor edit, notifications will not be sent to the watchers of that content.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.update_property">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2816,7 +2821,7 @@ Example updated property data:
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.update_space">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2864,7 +2869,7 @@ Example updated space definition:
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.convert_contentbody_to_new_type">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2907,7 +2912,7 @@ Source Representation |   Destination Representation Supported
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.delete_content_by_id">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2940,7 +2945,7 @@ Trashes or purges a piece of Content, based on its {@link ContentType} and {@lin
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.delete_label_by_id">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -2978,7 +2983,7 @@ that can be accepted (and has no real apparent upside).
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.delete_property">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -3009,7 +3014,7 @@ Deletes a content property.
         <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="PythonConfluenceAPI.api-pysrc.html#ConfluenceAPI.delete_space">source&nbsp;code</a></span>&nbsp;
+    >&nbsp;
     </td>
   </tr></table>
   
@@ -3107,13 +3112,18 @@ Clients can follow the status link in the response and poll it until the task co
       <th>&nbsp;&nbsp;&nbsp;<a
         href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
 
-      <th class="navbar" width="100%"></th>
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/pushrodtechnology/PythonConfluenceAPI">PythonConfluenceAPI</a></th>
+          </tr></table></th>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Jul 11 22:52:22 2015
+    Generated by Epydoc 3.0.1 on Sat Jul 11 23:14:44 2015
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

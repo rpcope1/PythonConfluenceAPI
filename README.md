@@ -5,6 +5,8 @@ PythonConfluenceAPI is a Pythonic API wrapper over the Confluence REST API, whic
 methods present in the current Confluence API spec, and is easily adapter to be used with minimal effort in other
 frameworks such as concurrent futures, greenlets, and other concurrency schemes.
 
+Read the latest PythonConfluenceAPI docs [here.](http://htmlpreview.github.io/?https://github.com/pushrodtechnology/PythonConfluenceAPI/blob/master/doc/html/index.html) 
+
 # How To Use
 
     # Load API wrapper from library
