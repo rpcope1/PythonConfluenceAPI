@@ -1,6 +1,9 @@
 __author__ = 'Robert Cope', 'Pushrod Technology'
 __author_email__ = 'robert.cope@pushrodtechnology.com'
-__version__ = '0.0.1rc'
+__version__ = '0.0.1rc2'
+
+import ez_setup
+ez_setup.use_setuptools()
 
 from setuptools import setup
 
@@ -13,6 +16,7 @@ setup(name='PythonConfluenceAPI',
                   "and is easily adapter to be used with minimal effort in other frameworks such as concurrent "
                   "futures, greenlets, and other concurrency schemes.",
       packages=['PythonConfluenceAPI'],
+      scripts=['ez_setup.py', 'setup.py'],
       license="LGPLv3",
       keywords="atlassian confluence api",
       url="https://github.com/pushrodtechnology/PythonConfluenceAPI",
