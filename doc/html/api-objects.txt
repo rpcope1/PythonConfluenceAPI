@@ -1,8 +1,10 @@
 PythonConfluenceAPI	PythonConfluenceAPI-module.html
 PythonConfluenceAPI.__package__	PythonConfluenceAPI-module.html#__package__
+PythonConfluenceAPI.all_of	PythonConfluenceAPI.api-module.html#all_of
 PythonConfluenceAPI.api	PythonConfluenceAPI.api-module.html
 PythonConfluenceAPI.api.nh	PythonConfluenceAPI.api-module.html#nh
 PythonConfluenceAPI.api.__package__	PythonConfluenceAPI.api-module.html#__package__
+PythonConfluenceAPI.api.all_of	PythonConfluenceAPI.api-module.html#all_of
 PythonConfluenceAPI.api.api_logger	PythonConfluenceAPI.api-module.html#api_logger
 PythonConfluenceAPI.cfapi	PythonConfluenceAPI.cfapi-module.html
 PythonConfluenceAPI.cfapi.request_patch	PythonConfluenceAPI.cfapi-module.html#request_patch
