@@ -1,5 +1,6 @@
 __author__ = "Robert Cope"
 
+import sys
 import requests
 from requests.auth import HTTPBasicAuth
 from urlparse import urljoin
@@ -12,6 +13,38 @@ except ImportError:
 api_logger = logging.getLogger(__name__)
 nh = logging.NullHandler()
 api_logger.addHandler(nh)
+
+
+def all_of(api_call, *args, **kwargs):
+    """
+    Generator that iterates over all results of an API call that requires limit/start pagination.
+
+    If the `limit` keyword argument is set, it is used to stop the
+    generator after the given number of result items.
+
+    >>> for i, v in enumerate(all_of(api.get_content)):
+    >>>     v = bunchify(v)
+    >>>     print('\t'.join((str(i), v.type, v.id, v.status, v.title)))
+
+    :param api_call: Confluence API call (method).
+    :param args: Positional arguments of the call.
+    :param kwargs: Keyword arguments of the call.
+    """
+    kwargs = kwargs.copy()
+    pos, outer_limit = 0, kwargs.get('limit', 0) or sys.maxint
+    while True:
+        response = api_call(*args, **kwargs)
+        for item in response.get('results', []):
+            pos += 1
+            if pos > outer_limit:
+                return
+            yield item
+        ##print((pos, response['start'], response['limit']))
+        if response.get('_links', {}).get('next', None):
+            kwargs['start'] = response['start'] + response['size']
+            kwargs['limit'] = response['limit']
+        else:
+            return
 
 
 class ConfluenceAPI(object):
