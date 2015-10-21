@@ -1128,9 +1128,9 @@ class ConfluenceAPI(object):
         assert {old_representation, new_representation} < {"storage", "editor", "view", "export_view"}
         # TODO: Enforce conversion rules better here.
         request_data = {"value": str(content_data), "representation": old_representation}
-        return self._service_put_request("rest/api/contentbody/convert/{to}".format(to=new_representation),
-                                         data=json.dumps(request_data),
-                                         headers={"Content-Type": "application/json"}, callback=callback)
+        return self._service_post_request("rest/api/contentbody/convert/{to}".format(to=new_representation),
+                                          data=json.dumps(request_data),
+                                          headers={"Content-Type": "application/json"}, callback=callback)
 
     def delete_content_by_id(self, content_id, status=None, callback=None):
         """

@@ -65,7 +65,7 @@
 <pre class="base-tree">
        object --+    
                 |    
-<a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html">api.ConfluenceAPI</a> --+
+api.ConfluenceAPI --+
                     |
                    <strong class="uidshort">ConfluenceFuturesAPI</strong>
 </pre>
@@ -98,7 +98,7 @@
         <span class="summary-sig-arg">username</span>,
         <span class="summary-sig-arg">password</span>,
         <span class="summary-sig-arg">uri_base</span>,
-        <span class="summary-sig-arg">user_agent</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">PythonConfluenceAPI</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">user_agent</span>=<span class="summary-sig-default">ConfluenceAPI.DEFAULT_USER_AGENT</span>,
         <span class="summary-sig-arg">executor</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">max_workers</span>=<span class="summary-sig-default">10</span>)</span><br />
       Initialize the async concurrent.futures API object.</td>
@@ -154,53 +154,53 @@
   </tr>
   <tr>
     <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html">api.ConfluenceAPI</a></code></b>:
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#convert_contentbody_to_new_type">convert_contentbody_to_new_type</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#create_new_attachment_by_content_id">create_new_attachment_by_content_id</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#create_new_content">create_new_content</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#create_new_content_property">create_new_content_property</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#create_new_label_by_content_id">create_new_label_by_content_id</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#create_new_private_space">create_new_private_space</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#create_new_property">create_new_property</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#create_new_space">create_new_space</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#delete_content_by_id">delete_content_by_id</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#delete_label_by_id">delete_label_by_id</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#delete_property">delete_property</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#delete_space">delete_space</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_content">get_content</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_content_attachments">get_content_attachments</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_content_by_id">get_content_by_id</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_content_children">get_content_children</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_content_children_by_type">get_content_children_by_type</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_content_comments">get_content_comments</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_content_descendants">get_content_descendants</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_content_descendants_by_type">get_content_descendants_by_type</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_content_history_by_id">get_content_history_by_id</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_content_labels">get_content_labels</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_content_macro_by_hash">get_content_macro_by_hash</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_content_macro_by_macro_id">get_content_macro_by_macro_id</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_content_properties">get_content_properties</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_content_property_by_key">get_content_property_by_key</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_long_task_info">get_long_task_info</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_long_tasks">get_long_tasks</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_op_restrictions_by_content_operation">get_op_restrictions_by_content_operation</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_op_restrictions_for_content_id">get_op_restrictions_for_content_id</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_space_content">get_space_content</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_space_content_by_type">get_space_content_by_type</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_space_information">get_space_information</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#get_spaces">get_spaces</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#search_content">search_content</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#update_attachment">update_attachment</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#update_attachment_metadata">update_attachment_metadata</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#update_content_by_id">update_content_by_id</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#update_property">update_property</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#update_space">update_space</a></code>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>api.ConfluenceAPI</code></b>:
+      <code>convert_contentbody_to_new_type</code>,
+      <code>create_new_attachment_by_content_id</code>,
+      <code>create_new_content</code>,
+      <code>create_new_content_property</code>,
+      <code>create_new_label_by_content_id</code>,
+      <code>create_new_private_space</code>,
+      <code>create_new_property</code>,
+      <code>create_new_space</code>,
+      <code>delete_content_by_id</code>,
+      <code>delete_label_by_id</code>,
+      <code>delete_property</code>,
+      <code>delete_space</code>,
+      <code>get_content</code>,
+      <code>get_content_attachments</code>,
+      <code>get_content_by_id</code>,
+      <code>get_content_children</code>,
+      <code>get_content_children_by_type</code>,
+      <code>get_content_comments</code>,
+      <code>get_content_descendants</code>,
+      <code>get_content_descendants_by_type</code>,
+      <code>get_content_history_by_id</code>,
+      <code>get_content_labels</code>,
+      <code>get_content_macro_by_hash</code>,
+      <code>get_content_macro_by_macro_id</code>,
+      <code>get_content_properties</code>,
+      <code>get_content_property_by_key</code>,
+      <code>get_long_task_info</code>,
+      <code>get_long_tasks</code>,
+      <code>get_op_restrictions_by_content_operation</code>,
+      <code>get_op_restrictions_for_content_id</code>,
+      <code>get_space_content</code>,
+      <code>get_space_content_by_type</code>,
+      <code>get_space_information</code>,
+      <code>get_spaces</code>,
+      <code>search_content</code>,
+      <code>update_attachment</code>,
+      <code>update_attachment_metadata</code>,
+      <code>update_content_by_id</code>,
+      <code>update_property</code>,
+      <code>update_space</code>
       </p>
-    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html">api.ConfluenceAPI</a></code></b> (private):
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#_service_delete_request" onclick="show_private();">_service_delete_request</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#_service_get_request" onclick="show_private();">_service_get_request</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#_service_post_request" onclick="show_private();">_service_post_request</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#_service_put_request" onclick="show_private();">_service_put_request</a></code>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>api.ConfluenceAPI</code></b> (private):
+      <code>_service_delete_request</code>,
+      <code>_service_get_request</code>,
+      <code>_service_post_request</code>,
+      <code>_service_put_request</code>
       </p></div>
     <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
       <code>__delattr__</code>,
@@ -238,11 +238,11 @@
 </tr>
   <tr>
     <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html">api.ConfluenceAPI</a></code></b>:
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#ATTACHMENT_METADATA_KEYS">ATTACHMENT_METADATA_KEYS</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#DEFAULT_USER_AGENT">DEFAULT_USER_AGENT</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#NEW_CONTENT_REQUIRED_KEYS">NEW_CONTENT_REQUIRED_KEYS</a></code>,
-      <code><a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#UPDATE_CONTENT_REQUIRED_KEYS">UPDATE_CONTENT_REQUIRED_KEYS</a></code>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>api.ConfluenceAPI</code></b>:
+      <code>ATTACHMENT_METADATA_KEYS</code>,
+      <code>DEFAULT_USER_AGENT</code>,
+      <code>NEW_CONTENT_REQUIRED_KEYS</code>,
+      <code>UPDATE_CONTENT_REQUIRED_KEYS</code>
       </p>
     </td>
   </tr>
@@ -301,7 +301,7 @@
         <span class="sig-arg">username</span>,
         <span class="sig-arg">password</span>,
         <span class="sig-arg">uri_base</span>,
-        <span class="sig-arg">user_agent</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">PythonConfluenceAPI</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">user_agent</span>=<span class="sig-default">ConfluenceAPI.DEFAULT_USER_AGENT</span>,
         <span class="sig-arg">executor</span>=<span class="sig-default">None</span>,
         <span class="sig-arg">max_workers</span>=<span class="sig-default">10</span>)</span>
     <br /><em class="fname">(Constructor)</em>
@@ -350,7 +350,7 @@ Initialize the async concurrent.futures API object.
   :return: None</p>
   <dl class="fields">
     <dt>Overrides:
-        <a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#_start_http_session" onclick="show_private();">api.ConfluenceAPI._start_http_session</a>
+        <a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#_start_http_session">api.ConfluenceAPI._start_http_session</a>
     </dt>
   </dl>
 </td></tr></table>
@@ -396,7 +396,7 @@ Base method for handling HTTP requests via the current requests session.
 </pre>
   <dl class="fields">
     <dt>Overrides:
-        <a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#_service_request" onclick="show_private();">api.ConfluenceAPI._service_request</a>
+        <a href="PythonConfluenceAPI.api.ConfluenceAPI-class.html#_service_request">api.ConfluenceAPI._service_request</a>
     </dt>
   </dl>
 </td></tr></table>
@@ -433,7 +433,7 @@ Base method for handling HTTP requests via the current requests session.
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Oct 21 07:49:04 2015
+    Generated by Epydoc 3.0.1 on Wed Oct 21 09:41:45 2015
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
