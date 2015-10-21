@@ -823,7 +823,7 @@ class ConfluenceAPI(object):
                  or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
         """
         assert isinstance(label_names, list)
-        assert all(isinstance(ln, dict) and set(ln.keys) == {"prefix", "name"} for ln in label_names)
+        assert all(isinstance(ln, dict) and set(ln.keys()) == {"prefix", "name"} for ln in label_names)
         return self._service_get_request("rest/api/content/{id}/label".format(id=content_id),
                                          data=json.dumps(label_names), headers={"Content-Type": "application/json"},
                                          callback=callback)
