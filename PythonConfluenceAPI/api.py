@@ -111,6 +111,8 @@ class ConfluenceAPI(object):
             response.raise_for_status()
         if callback:
             return callback(response)
+        elif not response.text and not raw:
+            return None
         else:
             return response.content if raw else json.loads(response.text)
 

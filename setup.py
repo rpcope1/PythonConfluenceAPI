@@ -1,6 +1,6 @@
 __author__ = 'Robert Cope', 'Pushrod Technology'
 __author_email__ = 'robert.cope@pushrodtechnology.com'
-__version__ = '0.0.1rc3'
+__version__ = '0.0.1rc4'
 
 import ez_setup
 ez_setup.use_setuptools()
