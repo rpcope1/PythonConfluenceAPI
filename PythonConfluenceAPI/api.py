@@ -826,7 +826,7 @@ class ConfluenceAPI(object):
         """
         assert isinstance(label_names, list)
         assert all(isinstance(ln, dict) and set(ln.keys()) == {"prefix", "name"} for ln in label_names)
-        return self._service_get_request("rest/api/content/{id}/label".format(id=content_id),
+        return self._service_post_request("rest/api/content/{id}/label".format(id=content_id),
                                          data=json.dumps(label_names), headers={"Content-Type": "application/json"},
                                          callback=callback)
 
