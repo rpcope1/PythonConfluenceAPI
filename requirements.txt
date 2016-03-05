@@ -2,6 +2,7 @@
 # on e.g. Ubuntu 14.04 LTS
 
 anyjson>=0.3.3,<1
+future>=0.15.2
 futures>=3.0.3,<4
 requests[security]>=2.3.0,<3
 requests-futures>=0.9.5,<1
