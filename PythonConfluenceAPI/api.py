@@ -1,9 +1,14 @@
+from __future__ import absolute_import
+import future.standard_library
+future.standard_library.install_aliases()
+
 __author__ = "Robert Cope"
 
 import sys
 import requests
 from requests.auth import HTTPBasicAuth
-from urlparse import urljoin
+from urllib.parse import urljoin
+
 import logging
 try:
     import anyjson as json
@@ -31,7 +36,7 @@ def all_of(api_call, *args, **kwargs):
     :param kwargs: Keyword arguments of the call.
     """
     kwargs = kwargs.copy()
-    pos, outer_limit = 0, kwargs.get('limit', 0) or sys.maxint
+    pos, outer_limit = 0, kwargs.get('limit', 0) or sys.maxsize
     while True:
         response = api_call(*args, **kwargs)
         for item in response.get('results', []):
@@ -805,9 +810,9 @@ class ConfluenceAPI(object):
                  or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
         """
         if isinstance(attachments, list):
-            assert all(isinstance(at, dict) and "file" in at.keys() for at in attachments)
+            assert all(isinstance(at, dict) and "file" in list(at.keys()) for at in attachments)
         elif isinstance(attachments, dict):
-            assert "file" in attachments.keys()
+            assert "file" in list(attachments.keys())
         else:
             assert False
         return self._service_post_request("rest/api/content/{id}/child/attachment".format(id=content_id),
@@ -1034,7 +1039,7 @@ class ConfluenceAPI(object):
                  or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
         """
         if isinstance(attachment, dict):
-            assert "file" in attachment.keys()
+            assert "file" in list(attachment.keys())
         else:
             assert False
         return self._service_post_request("rest/api/content/{content_id}/child/attachment/{attachment_id}/data"

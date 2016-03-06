@@ -1,9 +1,13 @@
+from __future__ import absolute_import
+import future.standard_library
+future.standard_library.install_aliases()
+
 __author__ = 'Robert Cope'
 
 from requests.auth import HTTPBasicAuth
-from api import ConfluenceAPI, api_logger, json
+from .api import ConfluenceAPI, api_logger, json
 from requests_futures.sessions import FuturesSession
-from urlparse import urljoin
+from urllib.parse import urljoin
 
 
 # By default requests-futures request method returns the response object instead of the results of the callback;
