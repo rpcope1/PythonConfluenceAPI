@@ -6,3 +6,4 @@ future>=0.15.2
 futures>=3.0.3,<4
 requests[security]>=2.3.0,<3
 requests-futures>=0.9.5,<1
+future>=0.15.2,<1
