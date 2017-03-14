@@ -112,6 +112,7 @@ class ConfluenceAPI(object):
         if params:
             kwargs.update(params=params)
         response = self.session.request(request_type, uri, **kwargs)
+        response.encoding = 'utf-8'
         if raise_for_status:
             response.raise_for_status()
         if callback:
