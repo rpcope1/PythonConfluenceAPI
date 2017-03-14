@@ -94,11 +94,13 @@ class ConfluenceFuturesAPI(ConfluenceAPI):
             def base_callback(_, response):
                 if raise_for_status:
                     response.raise_for_status()
+                response.encoding = 'utf-8'
                 return callback(response)
         else:
             def base_callback(_, response):
                 if raise_for_status:
                     response.raise_for_status()
+                response.encoding = 'utf-8'
                 return response.content if raw else json.loads(response.text)
         response_future = self.session.request(request_type, uri, background_callback=base_callback, **kwargs)
         return response_future
